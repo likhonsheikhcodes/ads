@@ -1,7 +1,7 @@
 // ==============================
 // Flash USDT Sender - ads.js
 // ==============================
-// Repository URL: https://raw.githubusercontent.com/likhonsheikhcodes/ads/refs/heads/main/ads.js
+// Repository URL: https://likhonsheikhcodes.github.io/ads/ads.js (Emmabed with any kinds web HTML Ads For Higher CPRM Auto SEO with Goods ways advanced with AI Self bwcklinks creations automates ui enhancer)
 // Purpose: This script dynamically generates an interactive ad for the Flash USDT Sender platform.
 // It includes features like smooth animations, dynamic content, SEO optimizations, special offers,
 // dynamic popup, and responsive layout adjustments. It showcases USDT transfer services with advanced UI elements.
@@ -9,11 +9,9 @@
 // Contact: hello@likhonsheikh.com
 // ==============================
 
-(function() {
+(function () {
   // Auto Add SEO Meta Tags (Open Graph, Twitter Cards, and more)
   const head = document.head;
-
-  // SEO Meta Tags
   const metaTags = [
     { name: 'description', content: 'Send USDT instantly and securely with Flash USDT Sender. No fees, fast transactions, and cross-chain support.' },
     { name: 'keywords', content: 'USDT, transfer, cryptocurrency, cross-chain, blockchain, TRC20, ERC20, secure transfers' },
@@ -27,12 +25,11 @@
     { name: 'twitter:image', content: 'https://flashusdtsender.xyz/assets/images/og-image.png' },
   ];
 
-  // Add meta tags dynamically
-  metaTags.forEach(tag => {
+  metaTags.forEach((tag) => {
     const metaTag = document.createElement('meta');
-    for (const key in tag) {
+    Object.keys(tag).forEach((key) => {
       metaTag.setAttribute(key, tag[key]);
-    }
+    });
     head.appendChild(metaTag);
   });
 
@@ -40,7 +37,7 @@
   const backlinkSection = document.createElement('div');
   backlinkSection.className = 'backlink-section';
   backlinkSection.innerHTML = `
-    <p>🚀 Spread the word about Flash USDT Sender and get early access to exclusive offers! Share on:</p>
+    <p>Spread the word about Flash USDT Sender and get early access to exclusive offers! Share on:</p>
     <a href="https://twitter.com/share?url=https://flashusdtsender.xyz&text=Check%20out%20Flash%20USDT%20Sender%20-%20Fast%20and%20secure%20USDT%20transfers%20platform!" target="_blank">Twitter</a>
     <a href="https://www.facebook.com/sharer/sharer.php?u=https://flashusdtsender.xyz" target="_blank">Facebook</a>
     <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://flashusdtsender.xyz" target="_blank">LinkedIn</a>
@@ -66,7 +63,7 @@
 
   // Add a title and description dynamically
   const title = document.createElement('h1');
-  title.innerText = "🚀 Flash USDT Sender is Here!";
+  title.innerText = '🚀 Flash USDT Sender is Here!';
   adContainer.appendChild(title);
 
   const description = document.createElement('p');
@@ -83,11 +80,9 @@
   ];
 
   const ul = document.createElement('ul');
-  ul.className = 'features-list';
   featuresList.forEach(feature => {
     const li = document.createElement('li');
     li.textContent = feature;
-    li.className = 'feature-item';
     ul.appendChild(li);
   });
   adContainer.appendChild(ul);
@@ -136,14 +131,11 @@
 
     const closePopup = popup.querySelector('.popup-close');
     closePopup.addEventListener('click', () => {
-      popup.style.opacity = '0';
-      setTimeout(() => {
-        popup.style.display = 'none';
-      }, 300); // Match the transition duration
+      popup.style.display = 'none';
     });
 
     popup.style.display = 'flex';
-    popup.style.transition = 'opacity 0.5s ease-in-out';
+    popup.style.transition = 'opacity 0.3s ease-in-out';
     popup.style.opacity = '0';
     setTimeout(() => {
       popup.style.opacity = '1';
@@ -153,25 +145,9 @@
   // Dynamic responsive layout and animation triggers for the popup
   const adjustLayoutForMobile = () => {
     if (window.innerWidth < 768) {
-      adContainer.style.fontSize = '16px';
-      adContainer.style.padding = '15px';
-      button.style.padding = '10px 20px';
-      gallerySection.style.flexDirection = 'column';
-      gallerySection.style.alignItems = 'center';
-      gallerySection.style.justifyContent = 'center';
-      gallerySection.style.width = '100%';
-      gallerySection.style.overflowX = 'hidden';
-      gallerySection.style.maxHeight = '500px';
-      gallerySection.style.overflowY = 'auto';
-    } else {
-      adContainer.style.fontSize = '18px';
+      adContainer.style.fontSize = '14px';
       adContainer.style.padding = '20px';
       button.style.padding = '12px 24px';
-      gallerySection.style.flexDirection = 'row';
-      gallerySection.style.width = 'auto';
-      gallerySection.style.maxHeight = 'none';
-      gallerySection.style.overflowX = 'auto';
-      gallerySection.style.overflowY = 'hidden';
     }
   };
 
@@ -189,16 +165,4 @@
 
   // Trigger smooth transition for popup
   smoothPopupTransition();
-
-  // Apply CSS animations for images
-  const applyImageAnimations = () => {
-    const images = document.querySelectorAll('.gallery-image');
-    images.forEach((img, index) => {
-      setTimeout(() => {
-        img.style.opacity = '1';
-      }, 100 * index + 500);
-    });
-  };
-
-  applyImageAnimations();
 })();
