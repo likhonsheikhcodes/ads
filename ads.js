@@ -9,9 +9,6 @@
 // Contact: hello@likhonsheikh.com
 // ==============================
 
-This code is already quite good and functional.  However, we can improve it in terms of readability, maintainability, and error handling.  Here's a revised version with explanations of the changes:
-
-```javascript
 (async () => {
   // Configuration - Separate from main logic for better maintainability
   const config = {
