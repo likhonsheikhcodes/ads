@@ -1,0 +1,76 @@
+{
+  "global": {
+    "defaultAdId": "ad1",
+    "seo": {
+      "title": "Flash USDT Sender | Free Flash USDT ~ Get Free USDT",
+      "description": "Certified and secure platform for instant, free USDT transfers on Android, iOS, and Linux.",
+      "keywords": "USDT, Flash USDT Sender, crypto transfer, blockchain, secure crypto",
+      "og": {
+        "title": "Flash USDT Sender",
+        "description": "Fast & Secure: Free USDT Transfers | Android, iOS, Linux Certified",
+        "image": "https://likhonsheikhcodes.github.io/ads/images/IMG_0320.jpeg",
+        "url": "https://likhonsheikhcodes.github.io/ads/"
+      },
+      "twitter": {
+        "card": "summary_large_image",
+        "title": "Flash USDT Sender | Free Flash USDT",
+        "description": "The best platform for free, fast USDT transfers.",
+        "image": "https://likhonsheikhcodes.github.io/ads/images/IMG_0320.jpeg"
+      }
+    }
+  },
+  "ads": [
+    {
+      "id": "ad1",
+      "title": "🚀 Flash USDT Sender: Free & Fast Transfers!",
+      "description": "Send USDT with zero fees across multiple blockchains like TRC20 and ERC20. Secure and user-friendly.",
+      "images": [
+        "IMG_0270.png",
+        "IMG_0271.png",
+        "IMG_0280.png"
+      ],
+      "features": [
+        "⚡ Instant USDT Transfers",
+        "🔒 Secure Transactions",
+        "🌐 Cross-Chain Support (TRC20 & ERC20)",
+        "📱 Mobile & Desktop Compatibility"
+      ],
+      "cta": {
+        "text": "Get Started for Free",
+        "url": "https://likhonsheikhcodes.github.io/ads/access"
+      },
+      "popup": {
+        "title": "🎉 Special Offer: 85% Off!",
+        "description": "Unlock premium features now at an exclusive discount.",
+        "ctaText": "Claim Offer",
+        "ctaUrl": "https://likhonsheikhcodes.github.io/ads/access"
+      }
+    },
+    {
+      "id": "ad2",
+      "title": "🔗 Cross-Chain Crypto Transfers Simplified",
+      "description": "Transfer USDT securely with TRC20 and ERC20 support. Lightning-fast transactions.",
+      "images": [
+        "IMG_0293.jpeg",
+        "IMG_0315.png",
+        "IMG_0320.jpeg"
+      ],
+      "features": [
+        "🌟 Zero Transaction Fees",
+        "🔒 100% Secure Transfers",
+        "📱 Available on Android, iOS, & Web",
+        "🌍 Global Blockchain Support"
+      ],
+      "cta": {
+        "text": "Start Your Free Transfers",
+        "url": "https://likhonsheikhcodes.github.io/ads/access"
+      },
+      "popup": {
+        "title": "💎 Exclusive Early Access!",
+        "description": "Join now to experience seamless USDT transfers.",
+        "ctaText": "Join Now",
+        "ctaUrl": "https://likhonsheikhcodes.github.io/ads/access"
+      }
+    }
+  ]
+}
