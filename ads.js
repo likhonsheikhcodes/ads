@@ -1,7 +1,7 @@
 // ==============================
 // Flash USDT Sender - ads.js
 // ==============================
-// Repository URL: https://likhonsheikhcodes.github.io/ads/ads.js (Emmabed with any kinds web HTML Ads For Higher CPRM Auto SEO with Goods ways advanced with AI Self bwcklinks creations automates ui enhancer)
+// Repository URL: https://likhonsheikhcodes.github.io/ads/ads.js
 // Purpose: This script dynamically generates an interactive ad for the Flash USDT Sender platform.
 // It includes features like smooth animations, dynamic content, SEO optimizations, special offers,
 // dynamic popup, and responsive layout adjustments. It showcases USDT transfer services with advanced UI elements.
@@ -25,9 +25,7 @@
   try {
     // Fetch data
     const response = await fetch(config.jsonUrl);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch ${response.status}`);
-    }
+    if (!response.ok) throw new Error(`Failed to fetch ${response.status}`);
     const data = await response.json();
     const { global, ads } = data;
 
@@ -35,11 +33,11 @@
     const urlParams = new URLSearchParams(window.location.search);
     const selectedAdId = urlParams.get(config.adParam) || global.defaultAdId;
 
-    // Find the selected ad or fallback to the first one.  Improved error handling.
-    const selectedAd = ads.find(ad => ad.id === selectedAdId);
+    // Find the selected ad or fallback to the first one. Improved error handling.
+    let selectedAd = ads.find(ad => ad.id === selectedAdId);
     if (!selectedAd) {
       console.error("Selected ad not found, using the first ad as a fallback.");
-      if(ads.length > 0) { //added length check to avoid error if ads array is empty
+      if (ads.length > 0) {
         selectedAd = ads[0];
       } else {
         throw new Error("No ads found in the JSON data.");
@@ -49,20 +47,16 @@
     // Helper function to create meta tags
     const createMetaTag = (tag) => {
       const metaTag = document.createElement('meta');
-      for (const key in tag) {
-        metaTag.setAttribute(key, tag[key]);
-      }
+      Object.entries(tag).forEach(([key, value]) => metaTag.setAttribute(key, value));
       document.head.appendChild(metaTag);
     };
 
     // Add SEO meta tags using helper function
-    const { seo } = global;
-    Object.values(seo).forEach(item => {
-      for (const key in item) {
-        createMetaTag({...item[key],name: key});
-      }
+    Object.values(global.seo).forEach(item => {
+      Object.entries(item).forEach(([key, value]) => {
+        createMetaTag({ ...value, name: key });
+      });
     });
-
 
     // Render the ad
     const adContainer = createAdElement(selectedAd);
@@ -72,22 +66,19 @@
     setTimeout(() => {
       const popup = createPopupElement(selectedAd);
       document.body.appendChild(popup);
-      //Attach event listener to close button
-      popup.querySelector('.popup-close-modern').addEventListener('click', () => popup.remove());
+      // Attach event listener to close button
+      popup.querySelector('.popup-close-modern')
+        .addEventListener('click', () => popup.remove());
     }, config.popupDelay);
-
 
     // Responsive adjustments
     const adjustForMobile = () => {
-      if (window.innerWidth < config.mobileBreakpoint) {
-        adContainer.style.cssText = `padding: ${config.defaultStyles.padding}; font-size: ${config.defaultStyles.fontSize};`;
-      } else {
-        adContainer.style.cssText = ''; // Reset styles on larger screens
-      }
+      adContainer.style.cssText = window.innerWidth < config.mobileBreakpoint
+        ? `padding: ${config.defaultStyles.padding}; font-size: ${config.defaultStyles.fontSize};`
+        : ''; // Reset styles on larger screens
     };
     window.addEventListener('resize', adjustForMobile);
     adjustForMobile();
-
 
     // Dark mode toggle (simplified)
     const darkModeToggle = document.createElement('button');
