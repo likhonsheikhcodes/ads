@@ -9,160 +9,98 @@
 // Contact: hello@likhonsheikh.com
 // ==============================
 
-(function () {
-  // Auto Add SEO Meta Tags (Open Graph, Twitter Cards, and more)
-  const head = document.head;
+(async function () {
+  // Fetch dynamic data from ads.json
+  const jsonUrl = 'https://likhonsheikhcodes.github.io/ads/ads.json';
+  const data = await fetch(jsonUrl).then(response => response.json());
+  const { global, ads } = data;
+
+  // User-defined ad ID or fallback to default
+  const urlParams = new URLSearchParams(window.location.search);
+  const selectedAdId = urlParams.get('ad') || global.defaultAdId;
+
+  // Find the selected ad block or fallback to the first ad
+  const selectedAd = ads.find(ad => ad.id === selectedAdId) || ads[0];
+
+  // Add SEO meta tags
+  const { seo } = global;
   const metaTags = [
-    { name: 'description', content: 'Send USDT instantly and securely with Flash USDT Sender. No fees, fast transactions, and cross-chain support.' },
-    { name: 'keywords', content: 'USDT, transfer, cryptocurrency, cross-chain, blockchain, TRC20, ERC20, secure transfers' },
-    { property: 'og:title', content: 'Flash USDT Sender: Fast & Secure Transfers' },
-    { property: 'og:description', content: 'Experience seamless USDT transfers with Flash USDT Sender. Secure, fast, and no hidden fees.' },
-    { property: 'og:image', content: 'https://flashusdtsender.xyz/assets/images/og-image.png' },
-    { property: 'og:url', content: 'https://flashusdtsender.xyz' },
-    { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:title', content: 'Flash USDT Sender: Fast & Secure Transfers' },
-    { name: 'twitter:description', content: 'Send USDT seamlessly and securely with Flash USDT Sender. No fees, fast transfers, and cross-chain support.' },
-    { name: 'twitter:image', content: 'https://flashusdtsender.xyz/assets/images/og-image.png' },
+    { name: 'description', content: seo.description },
+    { name: 'keywords', content: seo.keywords },
+    { property: 'og:title', content: seo.og.title },
+    { property: 'og:description', content: seo.og.description },
+    { property: 'og:image', content: seo.og.image },
+    { property: 'og:url', content: seo.og.url },
+    { name: 'twitter:card', content: seo.twitter.card },
+    { name: 'twitter:title', content: seo.twitter.title },
+    { name: 'twitter:description', content: seo.twitter.description },
+    { name: 'twitter:image', content: seo.twitter.image }
   ];
 
-  metaTags.forEach((tag) => {
+  metaTags.forEach(tag => {
     const metaTag = document.createElement('meta');
-    Object.keys(tag).forEach((key) => {
+    Object.keys(tag).forEach(key => {
       metaTag.setAttribute(key, tag[key]);
     });
-    head.appendChild(metaTag);
+    document.head.appendChild(metaTag);
   });
 
-  // Dynamic Backlink Generation - Automatically generate a link to encourage users to share
-  const backlinkSection = document.createElement('div');
-  backlinkSection.className = 'backlink-section';
-  backlinkSection.innerHTML = `
-    <p>Spread the word about Flash USDT Sender and get early access to exclusive offers! Share on:</p>
-    <a href="https://twitter.com/share?url=https://flashusdtsender.xyz&text=Check%20out%20Flash%20USDT%20Sender%20-%20Fast%20and%20secure%20USDT%20transfers%20platform!" target="_blank">Twitter</a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=https://flashusdtsender.xyz" target="_blank">Facebook</a>
-    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://flashusdtsender.xyz" target="_blank">LinkedIn</a>
-  `;
-  document.body.appendChild(backlinkSection);
-
-  // Data for images & content
-  const imagesData = [
-    { src: 'images/IMG_0320.jpeg', alt: 'Flash USDT Sender', title: 'Speedy USDT Transfers' },
-    { src: 'images/IMG_0270.png', alt: 'No Fees', title: 'No Hidden Fees' },
-    { src: 'images/IMG_0271.png', alt: 'Low Cost', title: 'Low Cost, High Speed' },
-    { src: 'images/IMG_0280.png', alt: 'Global Support', title: 'Cross-Chain Support' },
-    { src: 'images/IMG_0293.jpeg', alt: 'Secure Transfers', title: 'Secure Blockchain Transactions' },
-    { src: 'images/IMG_0315.png', alt: 'Easy Access', title: 'Easy to Use, Fast to Send' }
-  ];
-
-  // Create the ad container and apply smooth animation for entry
+  // Create the ad container
   const adContainer = document.createElement('div');
-  adContainer.className = 'ad-container';
-  adContainer.style.opacity = '0';
-  adContainer.style.transform = 'scale(0.95)';
+  adContainer.className = 'ad-container-modern';
   document.body.appendChild(adContainer);
 
-  // Add a title and description dynamically
-  const title = document.createElement('h1');
-  title.innerText = '🚀 Flash USDT Sender is Here!';
-  adContainer.appendChild(title);
-
-  const description = document.createElement('p');
-  description.innerHTML = `
-    Experience lightning-fast, secure, and seamless USDT transfers with our platform. 
-    Instant transactions, low fees, and cross-chain support. Get started today and send USDT with ease!
+  // Render the selected ad block dynamically
+  adContainer.innerHTML = `
+    <h1>${selectedAd.title}</h1>
+    <p>${selectedAd.description}</p>
+    <ul class="features-list">
+      ${selectedAd.features.map(feature => `<li>${feature}</li>`).join('')}
+    </ul>
+    <div class="image-gallery-modern">
+      ${selectedAd.images
+        .map(img => `<img src="https://likhonsheikhcodes.github.io/ads/images/${img}" alt="${img}" class="gallery-image-modern">`)
+        .join('')}
+    </div>
+    <a href="${selectedAd.cta.url}" class="cta-button-modern" target="_blank">${selectedAd.cta.text}</a>
   `;
-  adContainer.appendChild(description);
 
-  // Add key features dynamically
-  const featuresList = [
-    '⚡ Instant Transfers', '🔗 TRC20 & ERC20 Support', '🌐 Web App Accessibility', 
-    '🔒 100% Secure', '📱 Easy-to-Use Mobile App', '🚀 Instant Navigation'
-  ];
-
-  const ul = document.createElement('ul');
-  featuresList.forEach(feature => {
-    const li = document.createElement('li');
-    li.textContent = feature;
-    ul.appendChild(li);
-  });
-  adContainer.appendChild(ul);
-
-  // Create a dynamic image gallery
-  const gallerySection = document.createElement('div');
-  gallerySection.className = 'image-gallery';
-  imagesData.forEach(image => {
-    const imgElement = document.createElement('img');
-    imgElement.src = image.src;
-    imgElement.alt = image.alt;
-    imgElement.title = image.title;
-    imgElement.className = 'gallery-image';
-    gallerySection.appendChild(imgElement);
-  });
-  adContainer.appendChild(gallerySection);
-
-  // Create a dynamic Call-To-Action button
-  const button = document.createElement('a');
-  button.textContent = 'Get Started Now!';
-  button.className = 'button';
-  button.href = 'https://flashusdtsender.xyz/access';
-  button.target = '_blank';
-  adContainer.appendChild(button);
-
-  // Apply smooth transition for the ad container
-  setTimeout(() => {
-    adContainer.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    adContainer.style.opacity = '1';
-    adContainer.style.transform = 'scale(1)';
-  }, 100);
-
-  // Create a popup with a special offer and smooth transition
+  // Popup logic
   setTimeout(() => {
     const popup = document.createElement('div');
-    popup.className = 'popup';
+    popup.className = 'popup-modern';
     popup.innerHTML = `
-      <div class="popup-content">
-        <span class="popup-close">&times;</span>
-        <h2>Exclusive Offer: 85% Off</h2>
-        <p>Get early access to Flash USDT Sender and enjoy a special discount today!</p>
-        <a href="https://flashusdtsender.xyz/access" target="_blank" class="popup-btn">Claim Your Offer Now</a>
+      <div class="popup-content-modern">
+        <span class="popup-close-modern">&times;</span>
+        <h2>${selectedAd.popup.title}</h2>
+        <p>${selectedAd.popup.description}</p>
+        <a href="${selectedAd.popup.ctaUrl}" class="popup-btn-modern" target="_blank">${selectedAd.popup.ctaText}</a>
       </div>
     `;
     document.body.appendChild(popup);
 
-    const closePopup = popup.querySelector('.popup-close');
-    closePopup.addEventListener('click', () => {
+    document.querySelector('.popup-close-modern').addEventListener('click', () => {
       popup.style.display = 'none';
     });
+  }, 3000); // Show popup after 3 seconds
 
-    popup.style.display = 'flex';
-    popup.style.transition = 'opacity 0.3s ease-in-out';
-    popup.style.opacity = '0';
-    setTimeout(() => {
-      popup.style.opacity = '1';
-    }, 100); // Start popup transition after a slight delay
-  }, 3000); // Show the popup after 3 seconds
-
-  // Dynamic responsive layout and animation triggers for the popup
-  const adjustLayoutForMobile = () => {
+  // Responsive adjustments
+  const adjustForMobile = () => {
     if (window.innerWidth < 768) {
-      adContainer.style.fontSize = '14px';
       adContainer.style.padding = '20px';
-      button.style.padding = '12px 24px';
+      adContainer.style.fontSize = '14px';
     }
   };
+  window.addEventListener('resize', adjustForMobile);
+  adjustForMobile();
 
-  window.addEventListener('resize', adjustLayoutForMobile);
-  adjustLayoutForMobile();
+  // Dark mode toggle
+  const darkModeToggle = document.createElement('button');
+  darkModeToggle.textContent = '🌙 Toggle Dark Mode';
+  darkModeToggle.className = 'dark-mode-toggle-modern';
+  document.body.appendChild(darkModeToggle);
 
-  // Function for smooth popup fade in and out
-  const smoothPopupTransition = () => {
-    const popup = document.querySelector('.popup');
-    popup.style.transition = 'opacity 0.5s ease-in-out';
-    setTimeout(() => {
-      popup.style.opacity = '1';
-    }, 100);
-  };
-
-  // Trigger smooth transition for popup
-  smoothPopupTransition();
+  darkModeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode-modern');
+  });
 })();
